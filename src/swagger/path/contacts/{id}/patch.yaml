@@ -1,0 +1,85 @@
+tags:
+  - Contacts
+summary: Patch contact
+operationId: patchContact
+description: Patch contact
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '68e512d520672c1831d21dd1'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: string
+            example: '+380200000000'
+          contactType:
+            description: "Contact's type"
+            type: string
+            enum: ['work', 'personal', 'home']
+            example: work
+          email:
+            description: "Contact's email"
+            type: string
+            example: john.doe@mail.com
+          isFavourite:
+            description: Is favourite contact
+            type: boolean
+            example: true
+          photo:
+            description: "Link to contact's photo"
+            type: string
+            format: binary
+responses:
+  '200':
+    description: 'Patch contact'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Contact patched successfully!
+            data:
+              $ref: ../../../components/schemas/contacts.yaml
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    description: Contact not found
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: Contact not found
+  '500':
+    $ref: '../../../components/responses/500.yaml'
