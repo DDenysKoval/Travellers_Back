@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
+import logoutUserController from '../../controllers/auth/logoutUserController.js';
 
 const router = Router();
 
-router.post('/logout', ctrlWrapper());
+router.post('/logout', ctrlWrapper(logoutUserController));
 
 export default router;

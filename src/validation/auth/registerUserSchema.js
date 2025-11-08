@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const minCharacters = 3;
-const maxCharacters = 20;
+const maxCharacters = 30;
 
 export const registerUserSchema = Joi.object({
   name: Joi.string()
