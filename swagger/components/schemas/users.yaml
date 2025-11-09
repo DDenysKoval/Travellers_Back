@@ -2,6 +2,9 @@ type: object
 required:
   - _id
   - name
+  - avatarUrl
+  - articlesAmount
+  - description
   - createdAt
   - updatedAt
 
