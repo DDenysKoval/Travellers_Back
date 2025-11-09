@@ -25,12 +25,12 @@ properties:
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
 
   articlesAmount:
-    type: Number
+    type: number
     description: Stores the numerical value of the total number of articles.
     example: 0
 
   description:
-    type: String
+    type: string
     description: brief description
     example: I love travels
 

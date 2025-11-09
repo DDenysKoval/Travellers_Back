@@ -37,13 +37,13 @@ responses:
             data:
               type: object
               required:
-                - data
+                - users
                 - page
                 - perPage
                 - totalItems
                 - totalPages
               properties:
-                data:
+                users:
                   type: array
                   items:
                     $ref: '../../components/schemas/users.yaml'
@@ -59,8 +59,6 @@ responses:
                 totalPages:
                   type: number
                   example: 4
-  '400':
-    $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
   '500':

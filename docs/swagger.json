@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Contacts",
+    "title": "Podorozhnuky",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -84,14 +84,14 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "data",
+                        "users",
                         "page",
                         "perPage",
                         "totalItems",
                         "totalPages"
                       ],
                       "properties": {
-                        "data": {
+                        "users": {
                           "type": "array",
                           "items": {
                             "$ref": "#/components/schemas/users"
@@ -119,9 +119,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -169,12 +166,12 @@
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
           },
           "articlesAmount": {
-            "type": "Number",
+            "type": "number",
             "description": "Stores the numerical value of the total number of articles.",
             "example": 0
           },
           "description": {
-            "type": "String",
+            "type": "string",
             "description": "brief description",
             "example": "I love travels"
           },
@@ -194,43 +191,6 @@
       }
     },
     "responses": {
-      "400": {
-        "description": "Bad Request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Bad Request"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Bad Request"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "401": {
         "description": "Unauthorized error",
         "content": {
