@@ -3,8 +3,7 @@ tags:
 summary: Get list of all users
 operationId: getUsers
 description: 'Get list of all users'
-security:
-  - bearerAuth: []
+security: []
 parameters:
   - in: query
     name: page
