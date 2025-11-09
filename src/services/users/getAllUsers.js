@@ -7,7 +7,7 @@ const getAllUsers = async ({ page, perPage }) => {
   const usersQuery = UsersCollection.find();
 
   const [totalItems, users] = await Promise.all([
-    UsersCollection.find().merge(usersQuery).countDocuments(),
+    UsersCollection.countDocuments(),
     usersQuery.skip(skip).limit(perPage),
   ]);
 
