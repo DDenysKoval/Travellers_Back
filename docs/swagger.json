@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "Podorozhnuky"
+    "description": "Contacts API"
   },
   "servers": [
     {
@@ -28,9 +28,217 @@
       "description": "Operations with Auth"
     }
   ],
-  "paths": {},
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get list of all users",
+        "operationId": "getUsers",
+        "description": "Get list of all users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "schema": {
+              "type": "integer",
+              "example": 15
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found Successfully!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User found Successfully!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "users",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages"
+                      ],
+                      "properties": {
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/users"
+                          }
+                        },
+                        "page": {
+                          "type": "number",
+                          "example": 2
+                        },
+                        "perPage": {
+                          "type": "number",
+                          "example": 4
+                        },
+                        "totalItems": {
+                          "type": "number",
+                          "example": 4
+                        },
+                        "totalPages": {
+                          "type": "number",
+                          "example": 4
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
   "components": {
-    "securitySchemes": {},
-    "schemas": {}
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "users": {
+        "type": "object",
+        "required": [
+          "_id",
+          "name",
+          "avatarUrl",
+          "articlesAmount",
+          "description",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User ID",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "name": {
+            "type": "string",
+            "description": "Contact name",
+            "example": "Vadim Sichak"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "description": "Link to user's avatar",
+            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          },
+          "articlesAmount": {
+            "type": "number",
+            "description": "Stores the numerical value of the total number of articles.",
+            "example": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "brief description",
+            "example": "I love travels"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "User createdAt",
+            "example": "2025-10-12T12:44:22.681+00:00"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "User updatedAt",
+            "example": "2025-10-12T12:44:22.681+00:00"
+          }
+        }
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

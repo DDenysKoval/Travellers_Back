@@ -7,7 +7,7 @@ export const calculatePaginationData = (count, page, perPage) => {
     page,
     perPage,
     totalPages,
-    totalContacts: count,
+    totalUsers: count,
     hasNextPage,
     hasPreviousPage,
   };

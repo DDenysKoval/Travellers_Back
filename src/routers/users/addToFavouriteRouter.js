@@ -5,6 +5,6 @@ import { validateBody } from '../../middlewares/validateBody.js';
 
 const router = Router();
 
-router.patch('/:storieId', isValidId, validateBody(), ctrlWrapper());
+router.patch('/:userId', isValidId, validateBody(), ctrlWrapper());
 
 export default router;

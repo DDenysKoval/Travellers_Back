@@ -16,11 +16,16 @@ export const usersSchema = new Schema(
       type: String,
       required: true
     },
-   avatarUrl: { type: String },
-    articlesAmount: { type: Number, default: 0 },
-    description: { type: String },
+   avatarUrl: { 
+     type: String 
+   },
+   articlesAmount: {
+     type: Number, default: 0 
+   },
+   description: {
+     type: String 
+   },
   },
-  
   {
     timestamps: true,
     versionKey: false,
