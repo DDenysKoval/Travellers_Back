@@ -1,0 +1,47 @@
+type: object
+required:
+  - _id
+  - name
+  - avatarUrl
+  - articlesAmount
+  - description
+  - createdAt
+  - updatedAt
+
+properties:
+  _id:
+    type: string
+    description: User ID
+    example: 65ca67e7ae7f10c88b598384
+
+  name:
+    type: string
+    description: Contact name
+    example: Vadim Sichak
+
+  avatarUrl:
+    type: string
+    description: Link to user's avatar
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+
+  articlesAmount:
+    type: Number
+    description: Stores the numerical value of the total number of articles.
+    example: 0
+
+  description:
+    type: String
+    description: brief description
+    example: I love travels
+
+  createdAt:
+    type: string
+    format: date-time
+    description: User createdAt
+    example: 2025-10-12T12:44:22.681+00:00
+
+  updatedAt:
+    type: string
+    format: date-time
+    description: User updatedAt
+    example: 2025-10-12T12:44:22.681+00:00

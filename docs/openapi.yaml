@@ -15,7 +15,10 @@ tags:
     description: Operations with Auth
 servers:
   - url: https://travellers-back.onrender.com
-paths: {}
+paths:
+  /users:
+    get:
+      $ref: ../swagger/paths/users/getAllUsers.yaml
 
 components:
   securitySchemes:
