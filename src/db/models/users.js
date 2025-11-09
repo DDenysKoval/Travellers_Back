@@ -15,8 +15,12 @@ export const usersSchema = new Schema(
     password: {
       type: String,
       required: true
-    }
+    },
+   avatarUrl: { type: String },
+    articlesAmount: { type: Number, default: 0 },
+    description: { type: String },
   },
+  
   {
     timestamps: true,
     versionKey: false,
