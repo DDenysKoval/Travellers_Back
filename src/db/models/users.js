@@ -1,3 +1,4 @@
+
 import { model, Schema } from 'mongoose';
 
 export const usersSchema = new Schema(
@@ -6,18 +7,24 @@ export const usersSchema = new Schema(
       type: String,
       required: true,
     },
-    avatarUrl: {
+    email: {
       type: String,
       required: true,
+      unique: true,
     },
-    articlesAmount: {
-      type: Number,
-      required: true,
-    },
-    description: {
+    password: {
       type: String,
-      required: true,
+      required: true
     },
+   avatarUrl: { 
+     type: String 
+   },
+   articlesAmount: {
+     type: Number, default: 0 
+   },
+   description: {
+     type: String 
+   },
   },
   {
     timestamps: true,
