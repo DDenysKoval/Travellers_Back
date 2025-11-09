@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import addToFavouriteRouter from './addToFavouriteRouter.js';
-// import authenticateUserRouter from './authenticateUserRouter.js';
+import authenticateUserRouter from './authenticateUserRouter.js';
 import deleteFromFavouriteRouter from './deleteFromFavourite.js';
 import getAllUserRouter from './getAllUsersRouter.js';
 import getMeRouter from './getMeRouter.js';
@@ -11,7 +11,7 @@ import updateUserInfoRouter from './updateUserInfoRouter.js';
 const usersRouter = Router();
 
 usersRouter.use(addToFavouriteRouter);
-// usersRouter.use(authenticateUserRouter);
+usersRouter.use(authenticateUserRouter);
 usersRouter.use(deleteFromFavouriteRouter);
 usersRouter.use(getAllUserRouter);
 usersRouter.use(getMeRouter);
