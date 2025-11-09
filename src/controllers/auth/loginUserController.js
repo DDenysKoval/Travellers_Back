@@ -1,22 +1,17 @@
 import { THIRTY_DAYS } from "../../constants/index.js";
+import { SessionsCollection } from "../../db/models/session.js";
 import loginUser from "../../services/auth/loginUser.js";
 
 const loginUserController = async (req, res) => {
-    const session = await loginUser(req.body);
-    res.cookie('refreshToken', session.refreshToken, {
-        httpOnly: true,
-        expires: new Date(Date.now() + THIRTY_DAYS)
-    });
-    res.cookie('sessionId', session._id, {
-        httpOnly: true,
-        expires: new Date(Date.now() + THIRTY_DAYS)
-    })
+    const user = await loginUser(req.body);
+    await SessionsCollection.deleteOne({ userId: user._id })
+
+    const newSession = await createSession(user._id);
+   setupSessionController(res, newSession)
     res.json({
         status: 200,
         message: 'Successfully logged in an user!',
-        data: {
-        accessToken: session.accessToken
-    }
+        data: user,
     })
 };
 
