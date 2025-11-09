@@ -1,4 +1,5 @@
 import { refreshUsersSession } from "../../services/auth/refreshUserSession.js";
+import setupSessionController from "./setupSessionController.js";
 
 const refreshUserSessionController = async (req, res) => {
     const session = await refreshUsersSession({
@@ -6,7 +7,7 @@ const refreshUserSessionController = async (req, res) => {
         refreshToken: req.cookies.refreshToken,
     })
 
-    setupSession(res, session);
+    setupSessionController(res, session);
     res.json({
         status: 200,
         message: 'Successfully refreshed a session!',

@@ -1,4 +1,7 @@
 import { SessionsCollection } from "../../db/models/session.js";
+import createSession from "./createSession.js";
+import createHttpError from "http-errors";
+
 
 export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   const session = await SessionsCollection.findOne({
@@ -18,7 +21,7 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   }
   await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
   
-  const newSession = await createSession();
+  const newSession = await createSession(session.userId);
 
   return newSession;
 };
