@@ -1,7 +1,6 @@
-import { FIFTEEN_MINUTES, THIRTY_DAYS } from "../../constants/index.js";
+import { FIFTEEN_MINUTES, THIRTY_DAYS } from '../../constants/index.js';
 import { randomBytes } from 'crypto';
-import { SessionsCollection } from "../../db/models/session.js";
-
+import { SessionsCollection } from '../../db/models/session.js';
 
 const createSession = async (userId) => {
   const accessToken = randomBytes(30).toString('base64');
@@ -16,4 +15,4 @@ const createSession = async (userId) => {
   });
 };
 
-export default createSession
+export default createSession;

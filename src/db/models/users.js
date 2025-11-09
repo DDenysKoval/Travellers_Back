@@ -1,4 +1,3 @@
-
 import { model, Schema } from 'mongoose';
 
 export const usersSchema = new Schema(
@@ -14,17 +13,17 @@ export const usersSchema = new Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
-   avatarUrl: { 
-     type: String 
-   },
-   articlesAmount: {
-     type: Number, default: 0 
-   },
-   description: {
-     type: String 
-   },
+    avatarUrl: {
+      type: String,
+    },
+    articlesAmount: {
+      type: Number,
+    },
+    description: {
+      type: String,
+    },
   },
   {
     timestamps: true,
