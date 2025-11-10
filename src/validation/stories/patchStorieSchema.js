@@ -5,7 +5,7 @@ const maxCharactersTitle = 50;
 const maxCharactersArticle = 500;
 
 export const patchStorieSchema = Joi.object({
-  img: Joi.string(),
+  img: Joi.binary().max(2 * 1024 * 1024),
   title: Joi.string().messages({
     'string.base': 'Title should be a string',
     'string.min': `Title should have be least than ${minCharacters}`,

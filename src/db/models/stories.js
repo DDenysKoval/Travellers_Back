@@ -1,4 +1,6 @@
 import { model, Schema } from 'mongoose';
+import "../models/category.js";
+import "../models/users.js";
 
 export const storiesSchema = new Schema(
   {
@@ -30,6 +32,7 @@ export const storiesSchema = new Schema(
     favoriteCount: {
       type: Number,
       required: true,
+      default: 0,
     },
   },
   {
