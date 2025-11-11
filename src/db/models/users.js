@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
 
-export const usersSchema = new Schema(
+export const usersSChema = new Schema(
   {
     name: {
       type: String,
@@ -24,6 +24,13 @@ export const usersSchema = new Schema(
     description: {
       type: String,
     },
+
+    favoriteStories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'stories',
+      },
+    ],
   },
   {
     timestamps: true,
@@ -31,10 +38,10 @@ export const usersSchema = new Schema(
   },
 );
 
-usersSchema.methods.toJSON = function () {
+usersSChema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-export const UsersCollection = model('users', usersSchema);
+export const UsersCollection = model('users', usersSChema);

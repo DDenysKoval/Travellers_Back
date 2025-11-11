@@ -7,11 +7,13 @@ import getMeRouter from './getMeRouter.js';
 import getUserByIdRouter from './getUserByIdRouter.js';
 import updateAvatarRouter from './updateAvatarRouter.js';
 import updateUserInfoRouter from './updateUserInfoRouter.js';
+import getFavoritesRouter from './getFavoritesRouter.js';
 
 const usersRouter = Router();
 
 usersRouter.use(addToFavouriteRouter);
 // usersRouter.use(authenticateUserRouter);
+usersRouter.use(getFavoritesRouter);
 usersRouter.use(deleteFromFavouriteRouter);
 usersRouter.use(getAllUserRouter);
 usersRouter.use(getMeRouter);
