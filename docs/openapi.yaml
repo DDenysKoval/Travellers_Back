@@ -22,7 +22,12 @@ paths:
   /users/{id}:
     get:
       $ref: ../swagger/path/users/{id}/get.yaml
-
+  /users/get-me:
+    get:
+      $ref: ../swagger/path/users/get-me/get.yaml
+  /users/update-me:
+    patch:
+      $ref: ../swagger/path/users/update-me/patch.yaml
 components:
   securitySchemes:
     bearerAuth:
