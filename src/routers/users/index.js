@@ -15,6 +15,7 @@ usersRouter.use(addToFavouriteRouter);
 // usersRouter.use(authenticateUserRouter);
 usersRouter.use(getFavoritesRouter);
 usersRouter.use(deleteFromFavouriteRouter);
+usersRouter.use(getFavoritesRouter);
 usersRouter.use(getAllUserRouter);
 usersRouter.use(getMeRouter);
 usersRouter.use(getUserByIdRouter);

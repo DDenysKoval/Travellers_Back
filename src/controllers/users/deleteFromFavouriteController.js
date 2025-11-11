@@ -1,22 +1,12 @@
-import { User } from '../../models/user.js';
-import { HttpError } from '../../helpers/HttpError.js';
+import { deleteFromFavouriteService } from '../../services/users/deleteFromFavouriteService.js';
 
-export const deleteFromFavorite = async (req, res) => {
-  const userId = req.user._id;
-  const { storyId } = req.params;
+const deleteFromFavouriteController = async (req, res) => {
+  const { userId } = req.params;
+  const { storyId } = req.body;
 
-  const user = await User.findById(userId);
-  if (!user) {
-    throw HttpError(401, 'Not authorized');
-  }
+  const favoriteStories = await deleteFromFavouriteService(userId, storyId);
 
-  const updatedUser = await User.findByIdAndUpdate(
-    userId,
-    { $pull: { favoriteStories: storyId } },
-    { new: true },
-  ).populate('favoriteStories');
-
-  res.status(200).json({
-    favoriteStories: updatedUser.favoriteStories,
-  });
+  res.status(200).json({ favoriteStories });
 };
+
+export default deleteFromFavouriteController;
