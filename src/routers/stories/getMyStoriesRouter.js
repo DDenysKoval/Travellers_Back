@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
 import { authenticate } from '../../middlewares/authenticate.js';
-import getMeController from '../../controllers/users/getMeController.js';
+import { getMyStoriesController } from '../../controllers/stories/index.js';
+
 const router = Router();
 
-router.get('/get-me', authenticate, ctrlWrapper(getMeController));
+router.get('/my', authenticate, ctrlWrapper(getMyStoriesController));
 
 export default router;

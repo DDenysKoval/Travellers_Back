@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-
+import './categories.js';
 export const storiesSchema = new Schema(
   {
     img: {
