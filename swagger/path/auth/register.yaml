@@ -43,4 +43,12 @@ responses:
               example: 201
             message:
               type: string
-              example: S
+              example: Successfully registered a user!
+            data:
+              $ref: '../../components/schemas/users.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '409':
+    description: Email already in use
+  '500':
+    $ref: '../../components/responses/500.yaml'

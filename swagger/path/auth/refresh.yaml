@@ -27,8 +27,17 @@ responses:
       application/json:
         schema:
           type: object
+          required:
+            - status
+            - message
           properties:
             status:
               type: integer
               example: 401
-            message: ty
+            message:
+              type: string
+              example: Session token expired
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -6,6 +6,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: Podorozhnuky API
+
 tags:
   - name: Stories
     description: Operations with Stories
@@ -13,15 +14,34 @@ tags:
     description: Operations with Users
   - name: Auth
     description: Operations with Auth
+
 servers:
   - url: https://travellers-back.onrender.com
+
 paths:
   /users:
     get:
       $ref: ../swagger/path/users/get.yaml
+
   /users/{id}:
     get:
       $ref: ../swagger/path/users/{id}/get.yaml
+
+  /auth/register:
+    post:
+      $ref: ../swagger/path/auth/register.yaml
+
+  /auth/login:
+    post:
+      $ref: ../swagger/path/auth/login.yaml
+
+  /auth/refresh:
+    post:
+      $ref: ../swagger/path/auth/refresh.yaml
+
+  /auth/logout:
+    post:
+      $ref: ../swagger/path/auth/logout.yaml
 
 components:
   securitySchemes:
