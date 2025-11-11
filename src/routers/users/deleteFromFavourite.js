@@ -6,11 +6,10 @@ import deleteFromFavouriteController from '../../controllers/users/deleteFromFav
 
 const router = Router();
 
-// Прибрати історію з обраних поточного користувача
 router.delete(
   '/favorites/:storyId',
   authMiddleware,
-  isValidId, // або isValidId('storyId') — залежно від реалізації
+  isValidId,
   ctrlWrapper(deleteFromFavouriteController),
 );
 

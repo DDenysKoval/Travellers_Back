@@ -16,7 +16,6 @@ const getFavoritesController = async (req, res) => {
     throw HttpError(404, 'User not found');
   }
 
-  // Повертаємо масив збережених історій
   res.status(200).json({
     favoriteStories: user.favoriteStories,
   });

@@ -13,7 +13,7 @@ export const addToFavorite = async (req, res) => {
 
   const user = await User.findByIdAndUpdate(
     userId,
-    { $addToSet: { favoriteStories: storyId } }, // не дублює, якщо вже є
+    { $addToSet: { favoriteStories: storyId } },
     { new: true },
   ).populate('favoriteStories');
 
