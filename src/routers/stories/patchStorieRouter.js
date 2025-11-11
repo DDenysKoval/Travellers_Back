@@ -5,12 +5,14 @@ import { validateBody } from '../../middlewares/validateBody.js';
 import { upload } from '../../middlewares/multer.js';
 import { patchStorieSchema } from '../../validation/stories/patchStorieSchema.js';
 import patchStoriesController from '../../controllers/stories/patchStorieController.js';
+import { authenticate } from '../../middlewares/authenticate.js';
 
 const router = Router();
 
 router.patch(
   '/:storieId',
   upload.single('img'),
+  authenticate,
   isValidId,
   validateBody(patchStorieSchema),
   ctrlWrapper(patchStoriesController),

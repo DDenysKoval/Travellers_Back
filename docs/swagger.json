@@ -745,10 +745,12 @@
                   },
                   "email": {
                     "type": "string",
+                    "format": "email",
                     "example": "john@example.com"
                   },
                   "password": {
                     "type": "string",
+                    "format": "password",
                     "example": "secret123"
                   }
                 }
@@ -785,6 +787,9 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "409": {
             "description": "Email already in use"
           },
@@ -801,7 +806,7 @@
         ],
         "summary": "Login user",
         "operationId": "loginUser",
-        "description": "Login user by email and password, create a new session",
+        "description": "Login user by email and password, remove previous session and create a new one",
         "security": [],
         "requestBody": {
           "required": true,
@@ -829,7 +834,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully logged in user",
+            "description": "User successfully logged in",
             "content": {
               "application/json": {
                 "schema": {
@@ -855,6 +860,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -899,12 +907,19 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "description": "Session not found or expired",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -937,6 +952,9 @@
         "responses": {
           "204": {
             "description": "Successfully logged out"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -1006,6 +1024,33 @@
             "example": "2025-10-12T12:44:22.681+00:00"
           }
         }
+      },
+      "updateUserInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "Maryna"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "mary@example.com"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+          },
+          "description": {
+            "type": "string",
+            "example": "I love travels"
+          },
+          "articlesAmount": {
+            "type": "integer",
+            "example": 3
+          }
+        },
+        "minProperties": 1
       },
       "stories": {
         "type": "object",
@@ -1102,33 +1147,6 @@
             "example": "2025-11-11T15:27:41.315Z"
           }
         }
-      },
-      "updateUserInput": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "example": "Maryna"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "example": "mary@example.com"
-          },
-          "avatarUrl": {
-            "type": "string",
-            "format": "uri",
-            "example": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
-          },
-          "description": {
-            "type": "string",
-            "example": "I love travels"
-          },
-          "articlesAmount": {
-            "type": "integer",
-            "example": 3
-          }
-        },
-        "minProperties": 1
       }
     },
     "responses": {
@@ -1231,7 +1249,7 @@
         }
       },
       "404-NotFoundError": {
-        "description": "Not Found",
+        "description": "Unauthorized error",
         "content": {
           "application/json": {
             "schema": {
@@ -1268,7 +1286,7 @@
         }
       },
       "404-NotStorie": {
-        "description": "Storie not found",
+        "description": "Unauthorized error",
         "content": {
           "application/json": {
             "schema": {
