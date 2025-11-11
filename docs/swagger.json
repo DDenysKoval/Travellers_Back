@@ -207,6 +207,165 @@
           }
         }
       }
+    },
+    "/users/get-me": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get current user (me)",
+        "operationId": "getMe",
+        "description": "Get current user info",
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Current user fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "user"
+                  ],
+                  "properties": {
+                    "user": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  }
+                },
+                "examples": {
+                  "me": {
+                    "value": {
+                      "user": {
+                        "_id": "65ca67e7ae7f10c88b598384",
+                        "name": "Maryna",
+                        "email": "mary@example.com",
+                        "avatarUrl": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+                        "articlesAmount": 0,
+                        "description": "I love travels",
+                        "createdAt": "2025-10-12T12:44:22.681Z",
+                        "updatedAt": "2025-10-12T12:44:22.681Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/update-me": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update current user",
+        "operationId": "updateCurrentUser",
+        "description": "Update current user",
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUserInput"
+              },
+              "examples": {
+                "changeName": {
+                  "summary": "Change name",
+                  "value": {
+                    "name": "Maryna"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User updated successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "409": {
+            "description": "Email already in use",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 409
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email already in use"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -267,9 +426,73 @@
             "example": "2025-10-12T12:44:22.681+00:00"
           }
         }
+      },
+      "updateUserInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "Maryna"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "mary@example.com"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+          },
+          "description": {
+            "type": "string",
+            "example": "I love travels"
+          },
+          "articlesAmount": {
+            "type": "integer",
+            "example": 3
+          }
+        },
+        "minProperties": 1
       }
     },
     "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Bad Request"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Unauthorized error",
         "content": {
