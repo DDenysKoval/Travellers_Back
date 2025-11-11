@@ -1,0 +1,34 @@
+type: object
+properties:
+  _id:
+    description: "Contact's id"
+    type: string
+    example: '68498236a100312bea079008'
+  img:
+    description: "Link to contact's photo"
+    type: string
+    example: 'https://ftp.goit.study/img/travel-blog/de37b4596c7d4a2a81a821d2bs.webp'
+  title:
+    description: 'Story title'
+    type: string
+    example: 'Йорданія: шлях у Петру'
+  article:
+    description: 'description of history'
+    type: string
+    example: 'Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад.'
+  category:
+    description: 'id country and country'
+    type: object
+    example: { '_id': '68fb50c80ae91338641121f0', 'name': 'Азія' }
+  ownerId:
+    description: 'id user and user'
+    type: object
+    example: { '_id': '6881563901add19ee16fd017', 'name': 'Матвій Савченко' }
+  date:
+    description: 'date'
+    type: string
+    example: '2025-01-10T00:00:00.000Z'
+  favoriteCount:
+    description: 'number of favorites'
+    type: number
+    example: 4

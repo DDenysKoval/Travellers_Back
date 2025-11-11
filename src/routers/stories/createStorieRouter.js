@@ -1,19 +1,19 @@
-// import { Router } from 'express';
-// import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
-// import { validateBody } from '../../middlewares/validateBody.js';
-
-// const router = Router();
-
-// router.post('/', validateBody(), ctrlWrapper());
-
-// export default router;
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
+import { validateBody } from '../../middlewares/validateBody.js';
 import createStorieController from '../../controllers/stories/createStorieController.js';
-// якщо потім додадуть схему валідації — тоді підключимо validateBody
+import { upload } from '../../middlewares/multer.js';
+import { createStorieSchema } from '../../validation/stories/createStorieSchema.js';
+import { authenticate } from '../../middlewares/authenticate.js';
 
 const router = Router();
 
-router.post('/', ctrlWrapper(createStorieController));
+router.post(
+  '/',
+  upload.single('img'),
+  authenticate,
+  validateBody(createStorieSchema),
+  ctrlWrapper(createStorieController),
+);
 
 export default router;

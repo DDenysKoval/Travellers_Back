@@ -1,4 +1,6 @@
 import { model, Schema } from 'mongoose';
+import "../models/category.js";
+import "../models/users.js";
 
 export const storiesSchema = new Schema(
   {
@@ -26,15 +28,18 @@ export const storiesSchema = new Schema(
     date: {
       type: Date,
       required: true,
+      default: Date.now,
     },
     favoriteCount: {
       type: Number,
       required: true,
+      default: 0,
     },
   },
   {
-    timestamps: true,
+    versionKey: false,
   },
+
 );
 
 export const StoriesCollection = model('stories', storiesSchema);

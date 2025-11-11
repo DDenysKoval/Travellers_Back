@@ -1,12 +1,18 @@
-// src/controllers/stories/getAllStoriesController.js
-import { StoriesCollection } from '../../db/models/stories.js';
+import getAllStories from '../../services/stories/getAllStories.js';
+import { parseFilterParams } from '../../utils/parseFilterParams.js';
 
 const getAllStoriesController = async (req, res) => {
-  const stories = await StoriesCollection.find();
+  const { page, perPage } = parseFilterParams(req.query);
+  const filter = parseFilterParams(req.query);
+  const stories = await getAllStories({
+    page,
+    perPage,
+    filter,
+  });
 
   res.status(200).json({
     status: 200,
-    message: 'Stories fetched successfully',
+    message: 'Successfully found stories!',
     data: stories,
   });
 };
