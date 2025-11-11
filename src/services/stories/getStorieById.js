@@ -1,4 +1,4 @@
-import { StoriesCollection } from '../../db/models/stories';
+import { StoriesCollection } from '../../db/models/stories.js';
 
 const getStorieById = async (storyId) => {
   const story = await StoriesCollection.findOne({
