@@ -3,8 +3,7 @@ tags:
 summary: Get story by id
 operationId: getStoryById
 description: 'Get story by id'
-security:
-  - bearerAuth: []
+security: []
 parameters:
   - in: path
     name: id

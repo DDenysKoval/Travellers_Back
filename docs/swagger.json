@@ -584,6 +584,77 @@
       }
     },
     "/stories/{id}": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get story by id",
+        "operationId": "getStoryById",
+        "description": "Get story by id",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get story by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found story with id 65ca67e7ae7f10c88b598384!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/storiesId"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Story not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "Stories"
@@ -1145,6 +1216,54 @@
             "description": "date",
             "type": "string",
             "example": "2025-11-11T15:27:41.315Z"
+          }
+        }
+      },
+      "storiesId": {
+        "type": "object",
+        "required": [
+          "_id",
+          "img",
+          "title",
+          "article",
+          "category",
+          "ownerId",
+          "date",
+          "favoriteCount"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "img": {
+            "type": "string",
+            "example": "https://images.unsplash.com/photo.jpg"
+          },
+          "title": {
+            "type": "string",
+            "example": "Венеція без туристів"
+          },
+          "article": {
+            "type": "string",
+            "example": "Текст статті про Венецію..."
+          },
+          "category": {
+            "type": "string",
+            "example": "Travel"
+          },
+          "ownerId": {
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598123"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-11-11T12:00:00Z"
+          },
+          "favoriteCount": {
+            "type": "integer",
+            "example": 10
           }
         }
       }

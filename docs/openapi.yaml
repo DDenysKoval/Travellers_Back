@@ -33,7 +33,7 @@ paths:
   /users/update-me:
     patch:
       $ref: ../swagger/path/users/update-me/patch.yaml
-      
+
   /stories:
     get:
       $ref: ../swagger/path/stories/get.yaml
@@ -45,8 +45,7 @@ paths:
     patch:
       $ref: ../swagger/path/stories/{id}/patch.yaml
     delete:
-      $ref: ../swagger/path/stories/{id}/delete.yaml 
-  
+      $ref: ../swagger/path/stories/{id}/delete.yaml
 
   /auth/register:
     post:
@@ -60,10 +59,6 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/path/auth/logout.yaml
-
-  /stories/{id}:
-    get:
-      $ref: ../swagger/path/stories/{id}/get.yaml
 
 components:
   securitySchemes:
