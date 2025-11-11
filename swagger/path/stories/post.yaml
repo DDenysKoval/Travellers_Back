@@ -1,0 +1,61 @@
+tags:
+  - Stories
+summary: Create storie
+operationId: createStories
+description: 'Create a storie with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - img
+          - title
+          - article
+          - category
+        properties:
+          img:
+            description: 'Image file'
+            type: string
+            format: binary
+          title:
+            description: 'Story titile'
+            type: string
+            example: 'Йорданія: шлях у Петр'
+          article:
+            description: 'Story content'
+            type: string
+            example: 'Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад.'
+          category:
+            description: 'Category id'
+            type: string
+            example: '6881563901add19ee16fd017'
+responses:
+  '201':
+    description: Createa stories
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a stories!
+            data:
+              type: object
+              $ref: ../../components/schemas/stories-post.yaml
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404-NotFoundError.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

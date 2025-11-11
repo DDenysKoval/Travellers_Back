@@ -1,9 +1,10 @@
 import createStorie from "../../services/stories/createStorie.js";
-// import { saveFileToCloudinary } from "../../utils/saveFileToCloudinary.js";
+import getEnvVar from "../../utils/getEnvVar.js";
+import { saveFileToCloudinary } from "../../utils/saveFileToCloudinary.js";
 import { saveFileToUploadDir } from "../../utils/saveFileToUploadDir.js";
 
-const createContactController = async (req, res) => {
-    // const userId = req.user._id;
+const createStorieController = async (req, res) => {
+  const ownerId = req.user._id;
   const photo = req.file;
 
   let photoUrl;
@@ -12,17 +13,18 @@ const createContactController = async (req, res) => {
     photoUrl = await saveFileToUploadDir(photo);
   }
 
-  // if (photo) {
-  //   if (getEnvVar('ENABLE_CLOUDINARY') === 'true'){
-  //     photoUrl = await saveFIleToCloudinary(photo);
-  //   } else {
-  //     photoUrl = await saveFileToUploadDir(photo);
-  //   }
-  // }
+  if (photo) {
+    if (getEnvVar('ENABLE_CLOUDINARY') === 'true'){
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
 
   const stories = await createStorie({
     ...req.body,
     photo: photoUrl,
+    ownerId,
   });
   console.log(stories);
 
@@ -33,4 +35,4 @@ const createContactController = async (req, res) => {
   });
 };
 
-export default createContactController;
+export default createStorieController;

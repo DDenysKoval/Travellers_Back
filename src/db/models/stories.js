@@ -28,6 +28,7 @@ export const storiesSchema = new Schema(
     date: {
       type: Date,
       required: true,
+      default: Date.now,
     },
     favoriteCount: {
       type: Number,
@@ -36,8 +37,9 @@ export const storiesSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+    versionKey: false,
   },
+
 );
 
 export const StoriesCollection = model('stories', storiesSchema);
