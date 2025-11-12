@@ -1,0 +1,19 @@
+type: object
+properties:
+  name:
+    example: Maryna
+  email:
+    type: string
+    format: email
+    example: mary@example.com
+  avatarUrl:
+    type: string
+    format: uri
+    example: https://res.cloudinary.com/demo/image/upload/sample.jpg
+  description:
+    type: string
+    example: I love travels
+  articlesAmount:
+    type: integer
+    example: 3
+minProperties: 1

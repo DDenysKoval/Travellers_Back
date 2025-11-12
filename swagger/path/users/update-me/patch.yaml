@@ -1,0 +1,61 @@
+tags:
+  - Users
+summary: Update current user
+operationId: updateCurrentUser
+description: Update current user
+security:
+  - cookieAuth: []
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: '../../../components/schemas/updateUserInput.yaml'
+      examples:
+        changeName:
+          summary: Change name
+          value:
+            name: Maryna
+responses:
+  '200':
+    description: User updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: User updated successfully
+            data:
+              $ref: '../../../components/schemas/users.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '409':
+    description: Email already in use
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 409
+            message:
+              type: string
+              example: Email already in use
+  '500':
+    $ref: '../../../components/responses/500.yaml'
