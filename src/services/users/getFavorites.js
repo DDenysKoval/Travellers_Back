@@ -11,7 +11,6 @@ const getFavorites = async (userId) => {
     return [];
   }
 
-  // Отримуємо всі історії, ID яких у favorites
   const stories = await StoriesCollection.find({
     _id: { $in: user.favorites },
   });

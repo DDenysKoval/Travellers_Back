@@ -6,6 +6,6 @@ import { authenticate } from '../../middlewares/authenticate.js';
 
 const router = Router();
 
-router.get('/', authenticate, ctrlWrapper(getFavoritesController));
+router.get('/favourites', authenticate, ctrlWrapper(getFavoritesController));
 
 export default router;
