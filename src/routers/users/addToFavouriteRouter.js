@@ -1,10 +1,9 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
 import { isValidId } from '../../middlewares/isValidId.js';
-import { validateBody } from '../../middlewares/validateBody.js';
 
 const router = Router();
 
-router.patch('/:userId', isValidId, validateBody(), ctrlWrapper());
+router.patch('/:userId', isValidId, ctrlWrapper());
 
 export default router;

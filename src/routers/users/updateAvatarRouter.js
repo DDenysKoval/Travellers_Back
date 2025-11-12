@@ -1,17 +1,18 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
 import { isValidId } from '../../middlewares/isValidId.js';
-import { validateBody } from '../../middlewares/validateBody.js';
 import { upload } from '../../middlewares/multer.js';
+import updateAvatarController from '../../controllers/users/updateAvatarController.js';
+import { authenticate } from '../../middlewares/authenticate.js';
 
 const router = Router();
 
 router.patch(
-  '/:userId',
-  upload.single(),
+  '/:userId/avatar',
+  authenticate,
   isValidId,
-  validateBody(),
-  ctrlWrapper(),
+  upload.single('avatar'),
+  ctrlWrapper(updateAvatarController),
 );
 
 export default router;
