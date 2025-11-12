@@ -3,11 +3,12 @@ import deleteStorieController from './deleteStorieController.js';
 import getAllStoriesController from './getAllStoriesController.js';
 import getStorieByIdController from './getStorieByIdController.js';
 import patchStorieController from './patchStorieController.js';
-
+import getMyStoriesController from './getMyStoriesController.js';
 export {
   createStorieController,
   deleteStorieController,
   getAllStoriesController,
   getStorieByIdController,
   patchStorieController,
+  getMyStoriesController,
 };
