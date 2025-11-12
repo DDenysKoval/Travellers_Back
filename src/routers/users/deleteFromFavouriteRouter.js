@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
 import { authenticate } from '../../middlewares/authenticate.js';
-import { addToFavouriteController } from '../../controllers/users/index.js';
+import { deleteFromFavouriteController } from '../../controllers/users/index.js';
 
 const router = Router();
 
-router.post(
+router.delete(
   '/favourites/:storieId',
   authenticate,
-  ctrlWrapper(addToFavouriteController),
+  ctrlWrapper(deleteFromFavouriteController),
 );
 
 export default router;

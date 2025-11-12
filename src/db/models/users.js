@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 
 export const usersSchema = new Schema(
   {
@@ -24,6 +24,7 @@ export const usersSchema = new Schema(
     description: {
       type: String,
     },
+    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'stories' }],
   },
   {
     timestamps: true,

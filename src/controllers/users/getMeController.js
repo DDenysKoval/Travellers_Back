@@ -1,7 +1,7 @@
 import getMe from '../../services/users/getMe.js';
 
 const getMeController = async (req, res) => {
-  const userId = req.user._id; 
+  const userId = req.user._id;
   const user = await getMe(userId);
 
   if (!user) {
