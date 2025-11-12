@@ -39,6 +39,9 @@ paths:
       $ref: ../swagger/path/stories/get.yaml
     post:
       $ref: ../swagger/path/stories/post.yaml
+  /stories/my:
+    get:
+      $ref: ../swagger/path/stories/my.yaml
   /stories/{id}:
     get:
       $ref: ../swagger/path/stories/{id}/get.yaml
@@ -65,3 +68,11 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: accessToken
+
+security:
+  - bearerAuth: []
+  - cookieAuth: []
