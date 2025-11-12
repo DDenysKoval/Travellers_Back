@@ -14,5 +14,5 @@ const getMeController = async (req, res) => {
     message: 'User data retrieved successfully',
     data: user,
   });
-
+};
 export default getMeController;

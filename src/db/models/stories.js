@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import './categories.js';
+import './category.js';
 import "../models/category.js";
 import "../models/users.js";
 

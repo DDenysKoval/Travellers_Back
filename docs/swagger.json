@@ -14,6 +14,14 @@
       "url": "https://travellers-back.onrender.com"
     }
   ],
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "cookieAuth": []
+    }
+  ],
   "tags": [
     {
       "name": "Stories",
@@ -583,6 +591,83 @@
         }
       }
     },
+    "/stories/my": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get all stories created by the current user",
+        "description": "Returns a list of stories that were created by the currently authenticated user.\nRequires valid authentication (cookie or bearer token).\n",
+        "operationId": "getMyStories",
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched user's stories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "My stories fetched successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/stories"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Example of user's stories list",
+                    "value": {
+                      "status": 200,
+                      "message": "My stories fetched successfully",
+                      "data": [
+                        {
+                          "_id": "60f9a6d5c6a4d21b8d123456",
+                          "title": "My trip to the mountains",
+                          "article": "It was a great adventure!",
+                          "category": {
+                            "_id": "68fb50c80ae91338641121f0"
+                          },
+                          "ownerId": {
+                            "_id": "60f9a6d5c6a4d21b8d987654"
+                          },
+                          "img": "https://ftp.goit.study/img/travel-blog/1180012580aв4540989fda68bp.webp",
+                          "date": "2025-11-10T15:30:00Z",
+                          "favoriteCount": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
     "/stories/{id}": {
       "get": {
         "tags": [
@@ -1042,6 +1127,11 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      },
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "accessToken"
       }
     },
     "schemas": {
