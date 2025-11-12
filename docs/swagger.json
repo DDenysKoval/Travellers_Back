@@ -14,6 +14,14 @@
       "url": "https://travellers-back.onrender.com"
     }
   ],
+  "security": [
+    {
+      "bearerAuth": []
+    },
+    {
+      "cookieAuth": []
+    }
+  ],
   "tags": [
     {
       "name": "Stories",
@@ -366,6 +374,752 @@
           }
         }
       }
+    },
+    "/stories": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get list of stories",
+        "operationId": "getStories",
+        "description": "Get list stories",
+        "security": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "description": "page numbering",
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "in": "query",
+            "name": "perPage",
+            "description": "number of stories",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "description": "if you enter the country id from the database, it will display the stories of this country",
+            "schema": {
+              "type": "string",
+              "example": "68fb50c80ae91338641121f0"
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "if you run popular, it will display the top 3 stories",
+            "schema": {
+              "type": "string",
+              "example": "popular"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully found stories!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found stories!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "data",
+                        "page",
+                        "perPage",
+                        "totalItems",
+                        "totalPages",
+                        "hasNextPage",
+                        "hasPreviousPage"
+                      ],
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/stories"
+                          }
+                        },
+                        "page": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "perPage": {
+                          "type": "number",
+                          "example": 10
+                        },
+                        "totalItems": {
+                          "type": "number",
+                          "example": 4
+                        },
+                        "totalPages": {
+                          "type": "number",
+                          "example": 4
+                        },
+                        "hasNextPage": {
+                          "type": "boolean",
+                          "example": false
+                        },
+                        "hasPreviousPage": {
+                          "type": "boolean",
+                          "example": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404-NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Create storie",
+        "operationId": "createStories",
+        "description": "Create a storie with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "img",
+                  "title",
+                  "article",
+                  "category"
+                ],
+                "properties": {
+                  "img": {
+                    "description": "Image file",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "title": {
+                    "description": "Story titile",
+                    "type": "string",
+                    "example": "Йорданія: шлях у Петр"
+                  },
+                  "article": {
+                    "description": "Story content",
+                    "type": "string",
+                    "example": "Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад."
+                  },
+                  "category": {
+                    "description": "Category id",
+                    "type": "string",
+                    "example": "6881563901add19ee16fd017"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Createa stories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a stories!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/stories-post"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/stories/my": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get all stories created by the current user",
+        "description": "Returns a list of stories that were created by the currently authenticated user.\nRequires valid authentication (cookie or bearer token).\n",
+        "operationId": "getMyStories",
+        "security": [
+          {
+            "cookieAuth": []
+          },
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched user's stories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "My stories fetched successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/stories"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "summary": "Example of user's stories list",
+                    "value": {
+                      "status": 200,
+                      "message": "My stories fetched successfully",
+                      "data": [
+                        {
+                          "_id": "60f9a6d5c6a4d21b8d123456",
+                          "title": "My trip to the mountains",
+                          "article": "It was a great adventure!",
+                          "category": {
+                            "_id": "68fb50c80ae91338641121f0"
+                          },
+                          "ownerId": {
+                            "_id": "60f9a6d5c6a4d21b8d987654"
+                          },
+                          "img": "https://ftp.goit.study/img/travel-blog/1180012580aв4540989fda68bp.webp",
+                          "date": "2025-11-10T15:30:00Z",
+                          "favoriteCount": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/stories/{id}": {
+      "get": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Get story by id",
+        "operationId": "getStoryById",
+        "description": "Get story by id",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get story by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully found story with id 65ca67e7ae7f10c88b598384!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/storiesId"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Story not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Story not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "updating storie data",
+        "operationId": "patchStorie",
+        "description": "For partial update of storie data in the database",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "img": {
+                    "description": "Image file",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "title": {
+                    "description": "Story titile",
+                    "type": "string",
+                    "example": "Йорданія: шлях у Петр"
+                  },
+                  "article": {
+                    "description": "Story content",
+                    "type": "string",
+                    "example": "Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад."
+                  },
+                  "category": {
+                    "description": "Category id",
+                    "type": "string",
+                    "example": "6881563901add19ee16fd017"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully patched a storie!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully patched a storie!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/stories-post"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-NotStorie"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Stories"
+        ],
+        "summary": "Delete Storie by id",
+        "operationId": "deleteStorie",
+        "description": "Delete Storie by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Storie deleted successfully (no storie returned)"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-NotStorie"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register a new user",
+        "operationId": "registerUser",
+        "description": "Register a new user and create a session (sets cookies with tokens)",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "john@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "secret123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "409": {
+            "description": "Email already in use"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user",
+        "operationId": "loginUser",
+        "description": "Login user by email and password, remove previous session and create a new one",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "john@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "secret123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in an user!"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh user session",
+        "operationId": "refreshUserSession",
+        "description": "Refresh user session using cookies with sessionId and refreshToken",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successfully refreshed a session",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully refreshed a session!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "description": "Session not found or expired",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Session token expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout user",
+        "operationId": "logoutUser",
+        "description": "Logout user, delete session and clear cookies",
+        "security": [],
+        "responses": {
+          "204": {
+            "description": "Successfully logged out"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -373,6 +1127,11 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      },
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "accessToken"
       }
     },
     "schemas": {
@@ -453,6 +1212,150 @@
           }
         },
         "minProperties": 1
+      },
+      "stories": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "description": "Contact's id",
+            "type": "string",
+            "example": "68498236a100312bea079008"
+          },
+          "img": {
+            "description": "Link to contact's photo",
+            "type": "string",
+            "example": "https://ftp.goit.study/img/travel-blog/de37b4596c7d4a2a81a821d2bs.webp"
+          },
+          "title": {
+            "description": "Story title",
+            "type": "string",
+            "example": "Йорданія: шлях у Петру"
+          },
+          "article": {
+            "description": "description of history",
+            "type": "string",
+            "example": "Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад."
+          },
+          "category": {
+            "description": "id country and country",
+            "type": "object",
+            "example": {
+              "_id": "68fb50c80ae91338641121f0",
+              "name": "Азія"
+            }
+          },
+          "ownerId": {
+            "description": "id user and user",
+            "type": "object",
+            "example": {
+              "_id": "6881563901add19ee16fd017",
+              "name": "Матвій Савченко"
+            }
+          },
+          "date": {
+            "description": "date",
+            "type": "string",
+            "example": "2025-01-10T00:00:00.000Z"
+          },
+          "favoriteCount": {
+            "description": "number of favorites",
+            "type": "number",
+            "example": 4
+          }
+        }
+      },
+      "stories-post": {
+        "type": "object",
+        "properties": {
+          "img": {
+            "description": "Link to contact's photo",
+            "type": "string",
+            "example": "https://ftp.goit.study/img/travel-blog/de37b4596c7d4a2a81a821d2bs.webp"
+          },
+          "title": {
+            "description": "Story title",
+            "type": "string",
+            "example": "Йорданія: шлях у Петру"
+          },
+          "article": {
+            "description": "description of history",
+            "type": "string",
+            "example": "Петра — одне з нових чудес світу, і вживу воно вражає ще більше. Ми пройшли Сік — вузький каньйон, який веде до Скарбниці, і вразилися масштабом стародавнього міста, висіченого у скелях. День минув у дослідженні храмів, амфітеатрів і гробниць. А ввечері ми залишилися на нічне шоу, коли Петра освітлюється сотнями свічок. Атмосфера була настільки чарівною, що здавалося, час повернувся на тисячі років назад."
+          },
+          "category": {
+            "description": "id country and country",
+            "type": "string",
+            "example": "68fb50c80ae91338641121f0"
+          },
+          "ownerId": {
+            "description": "id user and user",
+            "type": "string",
+            "example": "691319cb15eacfba23119669"
+          },
+          "favoriteCount": {
+            "description": "number of favorites",
+            "type": "number",
+            "example": 0
+          },
+          "_id": {
+            "description": "Contact's id",
+            "type": "string",
+            "example": "68498236a100312bea079008"
+          },
+          "date": {
+            "description": "date",
+            "type": "string",
+            "example": "2025-11-11T15:27:41.315Z"
+          }
+        }
+      },
+      "storiesId": {
+        "type": "object",
+        "required": [
+          "_id",
+          "img",
+          "title",
+          "article",
+          "category",
+          "ownerId",
+          "date",
+          "favoriteCount"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598384"
+          },
+          "img": {
+            "type": "string",
+            "example": "https://images.unsplash.com/photo.jpg"
+          },
+          "title": {
+            "type": "string",
+            "example": "Венеція без туристів"
+          },
+          "article": {
+            "type": "string",
+            "example": "Текст статті про Венецію..."
+          },
+          "category": {
+            "type": "string",
+            "example": "Travel"
+          },
+          "ownerId": {
+            "type": "string",
+            "example": "65ca67e7ae7f10c88b598123"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-11-11T12:00:00Z"
+          },
+          "favoriteCount": {
+            "type": "integer",
+            "example": 10
+          }
+        }
       }
     },
     "responses": {
@@ -525,7 +1428,8 @@
               "type": "object",
               "required": [
                 "status",
-                "message"
+                "message",
+                "data"
               ],
               "properties": {
                 "status": {
@@ -534,7 +1438,80 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Internal Server Error"
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-NotFoundError": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Route not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-NotStorie": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Storie not found"
                 }
               }
             }

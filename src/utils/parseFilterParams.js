@@ -1,24 +1,35 @@
-const parseContactType = (contactType) => {
-  if (typeof contactType === 'undefined') return undefined;
-  const isContactType = (contactType) =>
-    ['home', 'personal', 'work'].includes(contactType);
-  if (isContactType(contactType)) return contactType;
+import { CategoriesCollection } from '../db/models/categories.js';
+
+const parseCategory = (category) => {
+  const isString = typeof category === 'string';
+  if (!isString) return;
+  const isCategory = (category) => CategoriesCollection.findById(category);
+
+  if (isCategory(category)) return category;
 };
 
-const parseIsFavourite = (value) => {
-  if (typeof value === 'undefined') return undefined;
-  const isFavourite = (value) => ['true', 'false'].includes(value);
-  if (isFavourite(value)) return value;
+const parseFavoriteCount = (favoriteCount) => {
+  const isString = typeof favoriteCount === 'string';
+  if (!isString) return;
+
+  const isFavoriteCount = (favoriteCount) =>
+    ['popular'].includes(favoriteCount);
+
+  if (isFavoriteCount(favoriteCount)) return favoriteCount;
 };
 
 export const parseFilterParams = (query) => {
-  const { contactType, isFavourite } = query;
+  const { category, type, page, perPage } = query;
 
-  const parsedContactType = parseContactType(contactType);
-  const parsedIsFavourite = parseIsFavourite(isFavourite);
+  const parsedCategory = parseCategory(category);
+  const parsedFavoriteCount = parseFavoriteCount(type);
+  const parsedPage = Number(page) > 0 ? Number(page) : 1;
+  const parsedPerPage = Number(perPage) > 0 ? Number(perPage) : 10;
 
   return {
-    contactType: parsedContactType,
-    isFavourite: parsedIsFavourite,
+    page: parsedPage,
+    perPage: parsedPerPage,
+    category: parsedCategory,
+    favoriteCount: parsedFavoriteCount,
   };
 };

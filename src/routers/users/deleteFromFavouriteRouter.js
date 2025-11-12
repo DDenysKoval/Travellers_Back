@@ -1,16 +1,14 @@
 import { Router } from 'express';
-import { isValidId } from '../../middlewares/isValidId.js';
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
-import deleteStorieController from '../../controllers/stories/deleteStorieController.js';
 import { authenticate } from '../../middlewares/authenticate.js';
+import { deleteFromFavouriteController } from '../../controllers/users/index.js';
 
 const router = Router();
 
 router.delete(
-  '/:storieId',
+  '/favourites/:storieId',
   authenticate,
-  isValidId,
-  ctrlWrapper(deleteStorieController),
+  ctrlWrapper(deleteFromFavouriteController),
 );
 
 export default router;

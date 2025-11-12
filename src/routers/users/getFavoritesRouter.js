@@ -1,14 +1,11 @@
 import { Router } from 'express';
+
 import { ctrlWrapper } from '../../utils/ctrlWrapper.js';
+import { getFavoritesController } from '../../controllers/users/index.js';
 import { authenticate } from '../../middlewares/authenticate.js';
-import { addToFavouriteController } from '../../controllers/users/index.js';
 
 const router = Router();
 
-router.post(
-  '/favourites/:storieId',
-  authenticate,
-  ctrlWrapper(addToFavouriteController),
-);
+router.get('/favourites', authenticate, ctrlWrapper(getFavoritesController));
 
 export default router;
