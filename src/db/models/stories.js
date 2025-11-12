@@ -1,7 +1,5 @@
 import { model, Schema } from 'mongoose';
 import './categories.js';
-import '../models/categories.js';
-import '../models/users.js';
 
 export const storiesSchema = new Schema(
   {
