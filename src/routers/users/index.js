@@ -11,6 +11,7 @@ import getFavoritesRouter from './getFavoritesRouter.js';
 
 const usersRouter = Router();
 
+usersRouter.use(updateAvatarRouter);
 usersRouter.use(updateUserInfoRouter);
 usersRouter.use(addToFavouriteRouter);
 usersRouter.use(getFavoritesRouter);
@@ -19,6 +20,5 @@ usersRouter.use(deleteFromFavouriteRouter);
 usersRouter.use(getAllUserRouter);
 usersRouter.use(getMeRouter);
 usersRouter.use(getUserByIdRouter);
-usersRouter.use(updateAvatarRouter);
 
 export default usersRouter;
