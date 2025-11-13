@@ -6,6 +6,6 @@ const router = Router();
 
 router.use('/stories', storiesRouter);
 router.use('/auth', authRouter);
-router.use('/users', usersRouter);
+router.use('/api/users', usersRouter);
 
 export default router;
