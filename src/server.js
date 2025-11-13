@@ -23,6 +23,7 @@ const setupServer = () => {
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
+      preflightContinue: false,
     }),
   );
   app.use(cookieParser());
@@ -33,7 +34,7 @@ const setupServer = () => {
       },
     }),
   );
-  app.options('/*', cors());
+
   app.use('/src/uploads', express.static(UPLOAD_DIR));
   app.use('/api-docs', swaggerDocs());
 
