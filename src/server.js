@@ -33,7 +33,7 @@ const setupServer = () => {
       },
     }),
   );
-  app.options('*', cors());
+  app.options('/*', cors());
   app.use('/src/uploads', express.static(UPLOAD_DIR));
   app.use('/api-docs', swaggerDocs());
 
