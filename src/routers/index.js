@@ -5,7 +5,7 @@ import usersRouter from './users/index.js';
 const router = Router();
 
 router.use('/stories', storiesRouter);
-router.use('/auth', authRouter);
+router.use('/api/auth', authRouter);
 router.use('/api/users', usersRouter);
 
 export default router;
