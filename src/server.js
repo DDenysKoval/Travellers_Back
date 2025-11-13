@@ -7,6 +7,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/index.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
+import categoriesRouter from './routers/categories/categories.js';
 
 const PORT = Number(process.env.PORT);
 
@@ -25,6 +26,7 @@ const setupServer = () => {
   );
   app.use('/src/uploads', express.static(UPLOAD_DIR));
   app.use('/api-docs', swaggerDocs());
+  app.use('/api/categories', categoriesRouter);
 
   app.use(router);
 

@@ -1,0 +1,9 @@
+Category:
+  type: object
+  properties:
+    _id:
+      type: string
+      example: '67a25fd2393aae6e783f1c95'
+    name:
+      type: string
+      example: 'Mountains'

@@ -33,6 +33,9 @@ paths:
   /users/update-me:
     patch:
       $ref: ../swagger/path/users/update-me/patch.yaml
+  /categories:
+    get:
+      $ref: ../swagger/path/stories/getCategories.yaml
 
   /stories:
     get:

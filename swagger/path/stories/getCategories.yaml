@@ -1,0 +1,39 @@
+tags:
+  - Categories
+
+summary: Get all categories
+description: Returns list of all categories
+operationId: getCategories
+
+responses:
+  '200':
+    description: Categories were retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: Categories were fetched successfully
+            data:
+              type: array
+              items:
+                $ref: ../../components/schemas/category.yaml#/Category
+
+  '500':
+    description: Server error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            error:
+              type: string
+              example: Internal Server Error
+
+  '404':
+    $ref: ../../components/responses/404-NotFoundError.yaml
