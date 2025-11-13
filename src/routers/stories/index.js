@@ -7,15 +7,22 @@ import getAllStoriesRouter from './getAllStoriesRouter.js';
 import getStoriesByIdRouter from './getStorieByIdRouter.js';
 import patchStorieRouter from './patchStorieRouter.js';
 import getMyStoriesRouter from './getMyStoriesRouter.js';
+import getStoriesbyOwnerIdRouter from './getStoriesbyOwnerIdRouter.js';
 
 const storiesRouter = Router();
 
 // storiesRouter.use(authenticateStorieRouter);
+
+
+
 storiesRouter.use(getMyStoriesRouter);
 storiesRouter.use(createStorieRouter);
 storiesRouter.use(deleteStorieRouter);
 storiesRouter.use(getAllStoriesRouter);
 storiesRouter.use(getStoriesByIdRouter);
 storiesRouter.use(patchStorieRouter);
+
+storiesRouter.use(getStoriesbyOwnerIdRouter);
+
 
 export default storiesRouter;
