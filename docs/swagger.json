@@ -227,9 +227,6 @@
         "security": [
           {
             "cookieAuth": []
-          },
-          {
-            "bearerAuth": []
           }
         ],
         "responses": {
@@ -363,6 +360,213 @@
                     "message": {
                       "type": "string",
                       "example": "Email already in use"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/users/favourite/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user's favourite stories",
+        "operationId": "GetUserFavourites",
+        "description": "Returns a list of stories added to the authenticated user's favourites.",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID of the story to add to favourites",
+            "schema": {
+              "type": "string",
+              "example": "6735cf2dc1f3c763316aeb12"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favourites fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Favourites fetched successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/stories"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add story to user's favourites",
+        "operationId": "AddToFavourite",
+        "description": "Adds a story to the authenticated user's list of favourite stories.",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "ID of the story to add to favourites",
+            "schema": {
+              "type": "string",
+              "example": "6735cf2dc1f3c763316aeb12"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Story already in favourites",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 200,
+                  "message": "Story already in favourites"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Story added to favourites successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 201,
+                  "message": "Story added to favourites successfully",
+                  "data": {
+                    "_id": "6735cf2dc1f3c763316aeb12",
+                    "title": "Amazing trip to Norway",
+                    "location": "Norway",
+                    "description": "Great experience...",
+                    "author": "6711225592a71f4caadca217",
+                    "createdAt": "2024-10-12T10:22:14.123Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "User or story not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": 404,
+                  "message": "Story not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Remove a story from user's favourites",
+        "operationId": "deleteFromFavourite",
+        "description": "Deletes a story from the authenticated user's favourites list.",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the story to remove from favourites"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Story removed from favourites successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Story removed from favourites successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Story not found in favourites",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "example": 404
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Story not found in favourites"
                     }
                   }
                 }
@@ -509,7 +713,7 @@
         "description": "Create a storie with payload",
         "security": [
           {
-            "bearerAuth": []
+            "cookieAuth": []
           }
         ],
         "requestBody": {
