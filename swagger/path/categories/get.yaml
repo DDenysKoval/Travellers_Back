@@ -23,7 +23,6 @@ responses:
               type: array
               items:
                 $ref: ../../components/schemas/category.yaml#/Category
-
   '500':
     description: Server error
     content:

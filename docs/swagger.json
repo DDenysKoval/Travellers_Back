@@ -28,6 +28,10 @@
       "description": "Operations with Stories"
     },
     {
+      "name": "Categories",
+      "description": "Operations with Categories"
+    },
+    {
       "name": "Users",
       "description": "Operations with Users"
     },
@@ -39,9 +43,7 @@
   "paths": {
     "/users": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get list of all users",
         "operationId": "getUsers",
         "description": "Get list of all users",
@@ -71,11 +73,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -135,9 +133,7 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get user by id",
         "operationId": "getUserById",
         "description": "Get user by id",
@@ -160,11 +156,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -192,10 +184,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
+                  "required": ["status", "message"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -218,9 +207,7 @@
     },
     "/users/get-me": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get current user (me)",
         "operationId": "getMe",
         "description": "Get current user info",
@@ -239,9 +226,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "user"
-                  ],
+                  "required": ["user"],
                   "properties": {
                     "user": {
                       "$ref": "#/components/schemas/users"
@@ -278,9 +263,7 @@
     },
     "/users/update-me": {
       "patch": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update current user",
         "operationId": "updateCurrentUser",
         "description": "Update current user",
@@ -317,11 +300,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -351,10 +330,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
+                  "required": ["status", "message"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -375,11 +351,52 @@
         }
       }
     },
+    "/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all categories",
+        "operationId": "getCategories",
+        "description": "Returns list of all categories",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Categories were retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Categories were fetched successfully"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/category"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404-NotFoundError"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
     "/stories": {
       "get": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Get list of stories",
         "operationId": "getStories",
         "description": "Get list stories",
@@ -429,11 +446,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -501,9 +514,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Create storie",
         "operationId": "createStories",
         "description": "Create a storie with payload",
@@ -517,12 +528,7 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "img",
-                  "title",
-                  "article",
-                  "category"
-                ],
+                "required": ["img", "title", "article", "category"],
                 "properties": {
                   "img": {
                     "description": "Image file",
@@ -556,11 +562,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -593,9 +595,7 @@
     },
     "/stories/my": {
       "get": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Get all stories created by the current user",
         "description": "Returns a list of stories that were created by the currently authenticated user.\nRequires valid authentication (cookie or bearer token).\n",
         "operationId": "getMyStories",
@@ -670,9 +670,7 @@
     },
     "/stories/{id}": {
       "get": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Get story by id",
         "operationId": "getStoryById",
         "description": "Get story by id",
@@ -695,11 +693,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -741,9 +735,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "updating storie data",
         "operationId": "patchStorie",
         "description": "For partial update of storie data in the database",
@@ -801,11 +793,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -836,9 +824,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Stories"
-        ],
+        "tags": ["Stories"],
         "summary": "Delete Storie by id",
         "operationId": "deleteStorie",
         "description": "Delete Storie by id",
@@ -876,9 +862,7 @@
     },
     "/auth/register": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Register a new user",
         "operationId": "registerUser",
         "description": "Register a new user and create a session (sets cookies with tokens)",
@@ -889,11 +873,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "email",
-                  "password"
-                ],
+                "required": ["name", "email", "password"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -921,11 +901,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -957,9 +933,7 @@
     },
     "/auth/login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Login user",
         "operationId": "loginUser",
         "description": "Login user by email and password, remove previous session and create a new one",
@@ -970,10 +944,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -995,11 +966,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -1031,9 +998,7 @@
     },
     "/auth/refresh": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Refresh user session",
         "operationId": "refreshUserSession",
         "description": "Refresh user session using cookies with sessionId and refreshToken",
@@ -1045,10 +1010,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
+                  "required": ["status", "message"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -1072,10 +1034,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message"
-                  ],
+                  "required": ["status", "message"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -1098,9 +1057,7 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Logout user",
         "operationId": "logoutUser",
         "description": "Logout user, delete session and clear cookies",
@@ -1212,6 +1169,20 @@
           }
         },
         "minProperties": 1
+      },
+      "category": {
+        "type": "object",
+        "required": ["_id", "name"],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "68fb50c80ae91338641121f0"
+          },
+          "name": {
+            "type": "string",
+            "example": "Азія"
+          }
+        }
       },
       "stories": {
         "type": "object",
@@ -1365,11 +1336,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1381,9 +1348,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1402,10 +1367,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
+              "required": ["status", "message"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1426,11 +1388,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1442,9 +1400,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1463,11 +1419,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -1479,9 +1431,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -1500,10 +1450,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
+              "required": ["status", "message"],
               "properties": {
                 "status": {
                   "type": "integer",

@@ -14,6 +14,8 @@ tags:
     description: Operations with Users
   - name: Auth
     description: Operations with Auth
+  - name: Categories
+    description: Operations with Categories
 
 servers:
   - url: https://travellers-back.onrender.com
@@ -35,7 +37,7 @@ paths:
       $ref: ../swagger/path/users/update-me/patch.yaml
   /categories:
     get:
-      $ref: ../swagger/path/stories/getCategories.yaml
+      $ref: ../swagger/path/categories/get.yaml
 
   /stories:
     get:
