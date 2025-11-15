@@ -21,24 +21,33 @@ servers:
   - url: https://travellers-back.onrender.com
 
 paths:
+  /auth/register:
+    post:
+      $ref: ../swagger/path/auth/register.yaml
+  /auth/login:
+    post:
+      $ref: ../swagger/path/auth/login.yaml
+  /auth/refresh:
+    post:
+      $ref: ../swagger/path/auth/refresh.yaml
+  /auth/logout:
+    post:
+      $ref: ../swagger/path/auth/logout.yaml
+
   /users:
     get:
       $ref: ../swagger/path/users/get.yaml
   /users/{id}:
     get:
       $ref: ../swagger/path/users/{id}/get.yaml
-
+    patch:
+      $ref: ../swagger/path/users/{id}/patch.yaml
   /users/get-me:
     get:
       $ref: ../swagger/path/users/get-me/get.yaml
-
   /users/update-me:
     patch:
       $ref: ../swagger/path/users/update-me/patch.yaml
-  /categories:
-    get:
-      $ref: ../swagger/path/categories/get.yaml
-
   /users/favourite/{id}:
     get:
       $ref: ../swagger/path/users/favourites/{id}/get.yaml
@@ -46,6 +55,10 @@ paths:
       $ref: ../swagger/path/users/favourites/{id}/post.yaml
     delete:
       $ref: ../swagger/path/users/favourites/{id}/delete.yaml
+
+  /categories:
+    get:
+      $ref: ../swagger/path/categories/get.yaml
 
   /stories:
     get:
@@ -62,19 +75,6 @@ paths:
       $ref: ../swagger/path/stories/{id}/patch.yaml
     delete:
       $ref: ../swagger/path/stories/{id}/delete.yaml
-
-  /auth/register:
-    post:
-      $ref: ../swagger/path/auth/register.yaml
-  /auth/login:
-    post:
-      $ref: ../swagger/path/auth/login.yaml
-  /auth/refresh:
-    post:
-      $ref: ../swagger/path/auth/refresh.yaml
-  /auth/logout:
-    post:
-      $ref: ../swagger/path/auth/logout.yaml
 
 components:
   securitySchemes:
