@@ -19,7 +19,6 @@ const setupServer = () => {
       origin: ['http://localhost:3000', 'https://travellers-front.vercel.app'],
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
       preflightContinue: false,
     }),
   );
