@@ -40,7 +40,7 @@ responses:
               type: string
               example: Avatar updated successfully
             data:
-              $ref: ../../../components/schemas/users.yaml
+              $ref: ../../../../components/schemas/users.yaml
   '400':
     description: No avatar file provided.
     content:

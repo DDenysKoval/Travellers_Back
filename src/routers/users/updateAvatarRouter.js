@@ -8,7 +8,7 @@ import { authenticate } from '../../middlewares/authenticate.js';
 const router = Router();
 
 router.patch(
-  '/:userId/avatar',
+  '/avatar/:userId',
   authenticate,
   isValidId,
   upload.single('avatar'),

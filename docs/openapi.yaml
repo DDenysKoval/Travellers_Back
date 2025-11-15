@@ -40,8 +40,9 @@ paths:
   /users/{id}:
     get:
       $ref: ../swagger/path/users/{id}/get.yaml
+  /users/avatar/{id}:
     patch:
-      $ref: ../swagger/path/users/{id}/patch.yaml
+      $ref: ../swagger/path/users/avatar/{id}/patch.yaml
   /users/get-me:
     get:
       $ref: ../swagger/path/users/get-me/get.yaml
