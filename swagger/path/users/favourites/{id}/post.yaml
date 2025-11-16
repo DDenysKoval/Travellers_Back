@@ -1,0 +1,48 @@
+tags:
+  - Users
+summary: Add story to user's favourites
+operationId: AddToFavourite
+description: Adds a story to the authenticated user's list of favourite stories.
+security:
+  - cookieAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    description: ID of the story to add to favourites
+    schema:
+      type: string
+      example: '6735cf2dc1f3c763316aeb12'
+responses:
+  '201':
+    description: Story added to favourites successfully
+    content:
+      application/json:
+        example:
+          status: 201
+          message: Story added to favourites successfully
+          data:
+            _id: '6735cf2dc1f3c763316aeb12'
+            title: 'Amazing trip to Norway'
+            location: 'Norway'
+            description: 'Great experience...'
+            author: '6711225592a71f4caadca217'
+            createdAt: '2024-10-12T10:22:14.123Z'
+  '200':
+    description: Story already in favourites
+    content:
+      application/json:
+        example:
+          status: 200
+          message: Story already in favourites
+  '404':
+    description: User or story not found
+    content:
+      application/json:
+        example:
+          status: 404
+          message: Story not found
+  '401':
+    $ref: ../../../../components/responses/401.yaml
+  '500':
+    $ref: '../../../../components/responses/500.yaml'

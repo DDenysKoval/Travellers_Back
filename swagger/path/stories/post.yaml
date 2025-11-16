@@ -4,7 +4,7 @@ summary: Create storie
 operationId: createStories
 description: 'Create a storie with payload'
 security:
-  - bearerAuth: []
+  - cookieAuth: []
 requestBody:
   content:
     multipart/form-data:

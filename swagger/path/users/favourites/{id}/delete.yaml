@@ -1,0 +1,45 @@
+tags:
+  - Users
+summary: Remove a story from user's favourites
+operationId: deleteFromFavourite
+description: Deletes a story from the authenticated user's favourites list.
+security:
+  - cookieAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: ID of the story to remove from favourites
+responses:
+  '200':
+    description: Story removed from favourites successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: Story removed from favourites successfully
+  '404':
+    description: Story not found in favourites
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: number
+              example: 404
+            message:
+              type: string
+              example: Story not found in favourites
+  '401':
+    $ref: ../../../../components/responses/401.yaml
+  '500':
+    $ref: '../../../../components/responses/500.yaml'

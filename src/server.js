@@ -24,6 +24,7 @@ const setupServer = () => {
       },
     }),
   );
+
   app.use('/src/uploads', express.static(UPLOAD_DIR));
   app.use('/api-docs', swaggerDocs());
 
