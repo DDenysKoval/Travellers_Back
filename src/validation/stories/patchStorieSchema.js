@@ -31,4 +31,5 @@ export const patchStorieSchema = Joi.object({
       'string.base': 'Category should be a string',
       'any.invalid': 'Category must be a string',
     }),
+    favoriteCount: Joi.string(),
 });
