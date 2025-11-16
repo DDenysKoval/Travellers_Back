@@ -1,10 +1,12 @@
 import { StoriesCollection } from "../../db/models/stories.js";
 
 const patchStorie = async (storieId, ownerId, payload) => {
-    console.log(storieId);
+    console.log(storieId, ownerId,payload);
 
     const rawResult = await StoriesCollection.findOneAndUpdate(
-    { _id: storieId, ownerId},
+    { _id: storieId
+      // , ownerId
+    },
     payload,
     {
       new: true,
