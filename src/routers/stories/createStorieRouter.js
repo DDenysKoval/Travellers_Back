@@ -12,7 +12,6 @@ router.post(
   '/',
   upload.single('img'),
   authenticate,
-  validateBody(createStorieSchema),
   ctrlWrapper(createStorieController),
 );
 
