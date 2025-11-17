@@ -10,14 +10,18 @@ const objectIdValidator = (value, helpers) => {
 };
 
 export const createStorieSchema = Joi.object({
-  img: Joi.binary()
-    .max(10 * 1024 * 1024)
-    .required()
-    .messages({
-      'binary.base': 'Image should be a binary file',
-      'binary.max': `Image file size shouldnot exceed 10 MB`,
-      'any.required': 'Image is required',
-    }),
+  img: Joi.any().custom((value, helper) => {
+    if (!value) {
+      return helper.message('Image is required');
+    }
+    if (!value.buffer || !Buffer.isBuffer(value.buffer)) {
+      return helper.message('Image should be a binary file');
+    }
+    if (value.size > 10 * 1024 * 1024) {
+      return helper.message('Image file size should not exceed 10 MB');
+    }
+    return value;
+  }),
   title: Joi.string().min(3).max(80).required().messages({
     'string.base': 'Title should be a string',
     'any.required': 'Title is required',
