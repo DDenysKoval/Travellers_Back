@@ -14,15 +14,8 @@ const setupServer = () => {
   const app = express();
 
   app.use(express.json());
-  app.use(
-    cors({
-      origin: ['http://localhost:3000', 'https://travellers-front.vercel.app'],
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      preflightContinue: false,
-    }),
-  );
+  app.use(cors());
+
   app.use(cookieParser());
   app.use(
     pino({
