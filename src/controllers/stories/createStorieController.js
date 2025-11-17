@@ -1,7 +1,5 @@
 import createStorie from '../../services/stories/createStorie.js';
-import getEnvVar from '../../utils/getEnvVar.js';
 import { saveFileToCloudinary } from '../../utils/saveFileToCloudinary.js';
-import { saveFileToUploadDir } from '../../utils/saveFileToUploadDir.js';
 
 const createStorieController = async (req, res) => {
   const ownerId = req.user._id;
