@@ -16,7 +16,7 @@ const getAllStories = async ({
   }
 
   if (filter.favoriteCount) {
-    storiesQuery.sort({ favoriteCount: -1 });
+    storiesQuery.sort({ favoriteCount: -1, _id: 1 });
   }
 
   const storiesCount = await StoriesCollection.find()
