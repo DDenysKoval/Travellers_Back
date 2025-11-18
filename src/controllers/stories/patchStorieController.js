@@ -3,16 +3,15 @@ import patchStorie from '../../services/stories/patchStorie.js';
 import { saveFileToCloudinary } from '../../utils/saveFileToCloudinary.js';
 
 const patchStoriesController = async (req, res, next) => {
-  const ownerId = req.user._id;
   const { storieId } = req.params;
   const photo = req.file;
   console.log(storieId);
 
   const photoUrl = await saveFileToCloudinary(photo);
 
-  const result = await patchStorie(storieId, ownerId, {
+  const result = await patchStorie(storieId, {
     ...req.body,
-    photo: photoUrl,
+    img: photoUrl,
   });
 
   console.log(result);
