@@ -13,7 +13,10 @@ const getFavorites = async (userId) => {
 
   const stories = await StoriesCollection.find({
     _id: { $in: user.favorites },
-  });
+  }).populate(
+    'ownerId',
+    '_id name email avatarUrl articlesAmount description createdAt updatedAt favorites',
+  );
 
   return stories;
 };
