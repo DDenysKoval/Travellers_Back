@@ -14,7 +14,7 @@ const registerUser = async (payload) => {
     password: encryptedPassword,
     description: `Hi my name is ${payload.name}. I will share my storie soon`,
     avatarUrl:
-      'https://res.cloudinary.com/dsr7znzlu/image/upload/v1762709153/Default_Avatar_om76t3.webp',
+      'https://res.cloudinary.com/dsr7znzlu/image/upload/v1763546472/Avatar_Default_aq5ti4.png',
     articlesAmount: 0,
   });
 };
