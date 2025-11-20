@@ -3,29 +3,32 @@ import patchStorie from '../../services/stories/patchStorie.js';
 import { saveFileToCloudinary } from '../../utils/saveFileToCloudinary.js';
 
 const patchStoriesController = async (req, res, next) => {
-  const { storieId } = req.params;
-  const photo = req.file;
-  console.log(storieId);
+  try {
+    const { storieId } = req.params;
+    const photo = req.file;
+    let photoUrl;
 
-  const photoUrl = await saveFileToCloudinary(photo);
+    if (photo) {
+      photoUrl = await saveFileToCloudinary(photo);
+    }
 
-  const result = await patchStorie(storieId, {
-    ...req.body,
-    img: photoUrl,
-  });
+    const result = await patchStorie(storieId, {
+      ...req.body,
+      ...(photoUrl && { img: photoUrl }),
+    });
 
-  console.log(result);
+    if (!result) {
+      return next(createHttpError(404, 'Storie not found'));
+    }
 
-  if (result === null) {
-    next(createHttpError(404, 'Storie not found'));
-    return;
+    res.json({
+      status: 200,
+      message: 'Successfully patched a storie!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
   }
-
-  res.json({
-    status: 200,
-    message: 'Successfully patched a storie!',
-    data: result,
-  });
 };
 
 export default patchStoriesController;
