@@ -14,7 +14,7 @@ router.patch(
   upload.single('img'),
   authenticate,
   isValidId,
-  validateBody(patchStorieSchema),
+  // validateBody(patchStorieSchema),
   ctrlWrapper(patchStoriesController),
 );
 

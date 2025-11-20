@@ -15,7 +15,6 @@ const patchStorie = async (storieId, payload) => {
       context: 'query',
     },
   );
-  console.log(rawResult);
 
   return rawResult;
 };
