@@ -4,6 +4,6 @@ import refreshUserSessionController from '../../controllers/auth/refreshUserSess
 
 const router = Router();
 
-router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+router.get('/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default router;
