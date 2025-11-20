@@ -69,6 +69,9 @@ paths:
   /stories/my:
     get:
       $ref: ../swagger/path/stories/my.yaml
+  /stories/owner/{id}:
+    get:
+      $ref: ../swagger/path/stories/owner/{id}/get.yaml
   /stories/{id}:
     get:
       $ref: ../swagger/path/stories/{id}/get.yaml
