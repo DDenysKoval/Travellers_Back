@@ -1,0 +1,56 @@
+tags:
+  - Stories
+summary: Get stories by owner ID
+operationId: getStoriesByOwnerId
+description: Get stories by ownerId
+security: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+    description: ID власника сторіс
+
+  - in: query
+    name: page
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      default: 1
+    description: Номер сторінки (починаючи з 1)
+
+  - in: query
+    name: perPage
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      default: 10
+    description: Кількість елементів на сторінку
+
+responses:
+  '200':
+    description: Successfully found owner stories
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found owner stories!
+            data:
+              type: array
+              items:
+                $ref: ../../../../components/schemas/stories.yaml
+  '400':
+    $ref: '../../../../components/responses/400.yaml'
+  '404':
+    $ref: '../../../../components/responses/404-NotFoundError.yaml'
+  '500':
+    $ref: '../../../../components/responses/500.yaml'
